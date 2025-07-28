@@ -1,7 +1,8 @@
 const express = require('express');
-const { employeeSubMit } = require('../controllers/empSubMitController');
+const { employeeSubMit, adminShowEmployeeDetails } = require('../controllers/empSubMitController');
 const router = express.Router();
 
-router.post("/empSubmit",employeeSubMit)
+router.post("/empSubmit",employeeSubMit);
+router.post("/admin",adminShowEmployeeDetails)
 
 module.exports = router;

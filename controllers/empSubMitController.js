@@ -105,3 +105,40 @@ exports.employeeSubMit = async (req, res) => {
         });
     }
 };
+
+
+
+exports.adminShowEmployeeDetails = async (req, res) =>{
+    try {
+        const {role} = req.body;
+
+        if(role !== "admin"){
+            return res.status(200).json({
+                sucess:true,
+                message:"Only Admin can see the messages (Not For Others Only Admin)"
+            })
+        }
+
+        const empAllDetails = await Employee.find({});
+
+        if(!empAllDetails){
+            return res.status(200).json({
+                sucess:false,
+                message:"Employee Details Not Found"
+            })
+        }
+
+        return res.status(200).json({
+            sucess:true,
+            length:empAllDetails.length,
+            empAllDetails
+        })
+
+    } catch (error) {
+        console.log(error,error.message);
+        return res.status(500).json({
+            sucess:false,
+            message:"Server Error in adminShowEmployeeDetails"
+        })
+    }
+}
